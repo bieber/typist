@@ -17,6 +17,17 @@
  * along with typist.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-.testClass {
+.editorCorrect {
+    color: green;
+    font-style:normal;
+}
+
+.editorUnattempted {
+    color: black;
+    font-style:normal;
+}
+
+.editorIncorrect {
     color: red;
+    font-style: normal;
 }

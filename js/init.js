@@ -21,10 +21,14 @@
  * along with typist.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var React = require('react');
+window.React = require('react');
+var Editor = require('./editor.js');
 
-var mountPoint = document.getElementById('react-mount');
 React.renderComponent(
-    <p className="testClass">Mount Point</p>,
-    mountPoint
+    <Editor
+        word="Test"
+        onStart={console.log.bind(console, 'started')}
+        onCompletion={console.log.bind(console, 'completed')}
+    />,
+    document.body
 );
