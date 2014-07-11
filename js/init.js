@@ -16,19 +16,57 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
-
+ *
  * You should have received a copy of the GNU General Public License
  * along with typist.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 window.React = require('react');
-var Editor = require('./editor.js');
+var TypingController = require('./typing_controller.js');
+
+var words = [
+    'These',
+    'are',
+    'some',
+    'words',
+    '.',
+    '\n',
+    'They',
+    'should',
+    'be',
+    'typed',
+    '.'
+];
+
+function displayResults(results) {
+    var resultItems = [];
+
+    for (var i = 0; i < words.length; i++) {
+        if (words[i] === '\n') {
+            continue;
+        }
+        var item = results[i];
+        var timeElapsed = (item.finish - item.start) / 1000;
+        resultItems.push(
+            <li>
+                {words[i]}: {timeElapsed}s
+            </li>
+        );
+    }
+    var totalTime =
+        (results[results.length - 1].finish - results[0].start) / 1000;
+
+    React.unmountComponentAtNode(document.body);
+    React.renderComponent(
+        <div>
+            <p>Total Time: {totalTime}s</p>
+            <ul>{resultItems}</ul>
+        </div>,
+        document.body
+    );
+}
 
 React.renderComponent(
-    <Editor
-        word="Test"
-        onStart={console.log.bind(console, 'started')}
-        onCompletion={console.log.bind(console, 'completed')}
-    />,
+    <TypingController words={words} onCompletion={displayResults} />,
     document.body
 );

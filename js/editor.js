@@ -17,16 +17,20 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
-
+ *
  * You should have received a copy of the GNU General Public License
  * along with typist.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 var React = require('react');
 
+var ENTER = 13;
+
 var Editor = React.createClass({
     propTypes: {
         word: React.PropTypes.string.isRequired,
+        completionChar: React.PropTypes.string.isRequired,
+        remainder: React.PropTypes.array.isRequired,
         onStart: React.PropTypes.func.isRequired,
         onCompletion: React.PropTypes.func.isRequired
     },
@@ -49,11 +53,21 @@ var Editor = React.createClass({
             newState.started = true;
             this.props.onStart();
         }
-        if (attempt === this.props.word) {
+        if (attempt === this.props.word+this.props.completionChar) {
             this.props.onCompletion();
         }
 
         this.setState(newState);
+    },
+
+    onKeyDown: function(event) {
+        if (event.which === ENTER) {
+            var wordMatch = this.props.word === this.state.attempt;
+            var finishedByEnter = this.props.completionChar === '\n';
+            if (wordMatch && finishedByEnter) {
+                this.props.onCompletion();
+            }
+        }
     },
 
     render: function() {
@@ -92,6 +106,36 @@ var Editor = React.createClass({
             }
         }
 
+        var rawParagraphs = [];
+        var currentParagraph = '';
+        for (var j in this.props.remainder) {
+            var word = this.props.remainder[j];
+            if (word === '\n') {
+                rawParagraphs.push(currentParagraph);
+                currentParagraph = '';
+            } else {
+                if (/[a-zA-Z]/.test(word[0])) {
+                    currentParagraph += ' ';
+                }
+                currentParagraph += word;
+            }
+        }
+        if (currentParagraph.length > 0) {
+            rawParagraphs.push(currentParagraph);
+        }
+
+        var firstParagraphRemainder = null;
+        if (rawParagraphs.length > 0) {
+            firstParagraphRemainder = rawParagraphs[0];
+        }
+
+        var otherParagraphs = null;
+        if (rawParagraphs.length > 1) {
+            otherParagraphs = rawParagraphs.slice(1).map(function(t, i, arr) {
+                return <p className="editorText" key={i}>{t}</p>;
+            });
+        }
+
         return (
             <div className="editor">
                 <input
@@ -99,10 +143,15 @@ var Editor = React.createClass({
                     type="text"
                     value={this.state.attempt}
                     onChange={this.onChange}
+                    onKeyDown={this.onKeyDown}
                 />
                 <p className="editorText">
-                    {correctText}{incorrectText}{unattemptedText}
+                    <em className="editorCurrentWord">
+                        {correctText}{incorrectText}{unattemptedText}
+                    </em>
+                    {firstParagraphRemainder}
                 </p>
+                {otherParagraphs}
             </div>
         );
     }
