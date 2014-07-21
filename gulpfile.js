@@ -42,6 +42,7 @@ gulp.task('watch', function() {
     gulp.watch('./js/**/*.js', ['build']);
     gulp.watch('./html/**/*.html', ['build']);
     gulp.watch('./css/**/*.css', ['build']);
+    gulp.watch('./config/config.js', ['build']);
 });
 
 gulp.task('default', ['build', 'watch'])

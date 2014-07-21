@@ -1,7 +1,3 @@
-/**
- * @jsx React.DOM
- */
-
 /*
  * Copyright Robert Bieber, 2014
  *
@@ -21,11 +17,10 @@
  * along with typist.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-window.React = require('react');
-var PageController = require('./page_controller.js');
-var config = require('../config/config.js');
-
-React.renderComponent(
-    <PageController config={config} />,
-    document.body
-);
+// This is the configuration for typist.  To compile successfully,
+// fill out the appropriate fields and save as config.js
+module.exports = {
+    // This should point to a running instance of wordserv, which you
+    // can find at www.github.com/bieber/wordserv
+    wordserv: "http://www.path.to/wordserv/"
+};
