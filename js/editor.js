@@ -2,7 +2,6 @@
  * @jsx React.DOM
  */
 
-
 /*
  * Copyright Robert Bieber, 2014
  *
@@ -110,11 +109,14 @@ var Editor = React.createClass({
         var currentParagraph = '';
         for (var j in this.props.remainder) {
             var word = this.props.remainder[j];
+            var lastWord = j > 0
+                ? this.props.remainder[j - 1]
+                : this.props.word;
             if (word === '\n') {
                 rawParagraphs.push(currentParagraph);
                 currentParagraph = '';
             } else {
-                if (/[a-zA-Z]/.test(word[0])) {
+                if (/[a-zA-Z]/.test(word[0]) && lastWord !== '-') {
                     currentParagraph += ' ';
                 }
                 currentParagraph += word;

@@ -75,7 +75,7 @@ var TypingController = React.createClass({
         if (this.state.currentWord + 1 < this.props.words.length) {
             var nextWord = this.props.words[this.state.currentWord + 1];
             var remainder = this.props.words.slice(this.state.currentWord + 1);
-            if (/[a-zA-Z]/.test(nextWord)) {
+            if (/[a-zA-Z]/.test(nextWord) && word !== '-') {
                 completionChar = ' ';
             } else if (nextWord !== '\n') {
                 completionChar = '';
