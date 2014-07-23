@@ -35,15 +35,22 @@ var ResultController = React.createClass({
         var results = this.props.results;
         var resultItems = [];
         var wordCount = 0;
+        var firstTime = null;
+        var lastTime = null;
 
         for (var i = 0; i < words.length; i++) {
             if (words[i] === '\n') {
                 continue;
             }
-            if (/.*[a-zA-Z].*/.test(words[i])) {
+            if (/[a-zA-Z]/.test(words[i])) {
                 wordCount++;
             }
             var item = results[i];
+            var lastTime = item.finish;
+            if (firstTime === null) {
+                firstTime = item.start;
+            }
+
             var timeElapsed = (item.finish - item.start) / 1000;
             resultItems.push(
                 <li key={i}>
@@ -51,8 +58,7 @@ var ResultController = React.createClass({
                 </li>
             );
         }
-        var totalTime =
-            (results[results.length - 1].finish - results[0].start) / 1000;
+        var totalTime = (lastTime - firstTime) / 1000;
 
         return (
             <div className="resultsDisplay">
