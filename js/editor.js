@@ -23,6 +23,8 @@
 
 var React = require('react');
 
+var Spacing = require('./spacing.js');
+
 var ENTER = 13;
 
 var Editor = React.createClass({
@@ -123,7 +125,7 @@ var Editor = React.createClass({
                 rawParagraphs.push(currentParagraph);
                 currentParagraph = '';
             } else {
-                if (/[a-zA-Z]/.test(word[0]) && lastWord !== '-') {
+                if (Spacing.spaceBefore(word, lastWord)) {
                     currentParagraph += ' ';
                 }
                 currentParagraph += word;

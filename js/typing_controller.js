@@ -24,6 +24,8 @@
 var React = require('react');
 var Editor = require('./editor.js');
 
+var Spacing = require('./spacing.js');
+
 var times = [];
 
 var TypingController = React.createClass({
@@ -75,7 +77,7 @@ var TypingController = React.createClass({
         if (this.state.currentWord + 1 < this.props.words.length) {
             var nextWord = this.props.words[this.state.currentWord + 1];
             var remainder = this.props.words.slice(this.state.currentWord + 1);
-            if (/[a-zA-Z]/.test(nextWord) && word !== '-') {
+            if (Spacing.spaceAfter(word, nextWord)) {
                 completionChar = ' ';
             } else if (nextWord !== '\n') {
                 completionChar = '';
