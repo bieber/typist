@@ -76,10 +76,10 @@ var InitialController = React.createClass({
             limits: null,
             error: false,
             busy: false,
-            denomination: DENOMINATIONS.chapters,
+            denomination: DENOMINATIONS.paragraphs,
             counts: {
                 chapters: 1,
-                paragraphs: 2,
+                paragraphs: 1,
                 words: 200
             }
         };
