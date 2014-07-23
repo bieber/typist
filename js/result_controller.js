@@ -26,7 +26,8 @@ var React = require('react');
 var ResultController = React.createClass({
     propTypes: {
         words: React.PropTypes.array.isRequired,
-        results: React.PropTypes.array.isRequired
+        results: React.PropTypes.array.isRequired,
+        onReset: React.PropTypes.func.isRequired
     },
 
     render: function() {
@@ -55,6 +56,7 @@ var ResultController = React.createClass({
 
         return (
             <div className="resultsDisplay">
+                <button onClick={this.props.onReset}>Reset</button>
                 <p>Total Time: {totalTime}s</p>
                 <p>Total Words: {wordCount}</p>
                 <p>WPM: {wordCount / totalTime * 60}</p>

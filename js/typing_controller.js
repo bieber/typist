@@ -31,7 +31,8 @@ var times = [];
 var TypingController = React.createClass({
     propTypes: {
         words: React.PropTypes.array.isRequired,
-        onCompletion: React.PropTypes.func.isRequired
+        onCompletion: React.PropTypes.func.isRequired,
+        onReset: React.PropTypes.func.isRequired
     },
 
     getInitialState: function() {
@@ -91,6 +92,7 @@ var TypingController = React.createClass({
                 completionChar={completionChar}
                 onStart={this.onStart}
                 onCompletion={this.onCompletion}
+                onReset={this.props.onReset}
             />
         );
     }

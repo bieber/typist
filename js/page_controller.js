@@ -44,6 +44,10 @@ var PageController = React.createClass({
         };
     },
 
+    onReset: function() {
+        this.setState(this.getInitialState());
+    },
+
     onWordsLoaded: function(words) {
         this.setState({state: STATES.typing, words: words});
     },
@@ -67,6 +71,7 @@ var PageController = React.createClass({
                 <TypingController
                     words={this.state.words}
                     onCompletion={this.onCompletion}
+                    onReset={this.onReset}
                 />
             );
 
@@ -75,6 +80,7 @@ var PageController = React.createClass({
                 <ResultController
                     words={this.state.words}
                     results={this.state.results}
+                    onReset={this.onReset}
                 />
             );
         }

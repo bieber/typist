@@ -33,7 +33,8 @@ var Editor = React.createClass({
         completionChar: React.PropTypes.string.isRequired,
         remainder: React.PropTypes.array.isRequired,
         onStart: React.PropTypes.func.isRequired,
-        onCompletion: React.PropTypes.func.isRequired
+        onCompletion: React.PropTypes.func.isRequired,
+        onReset: React.PropTypes.func.isRequired
     },
 
     getInitialState: function() {
@@ -156,6 +157,7 @@ var Editor = React.createClass({
                     onChange={this.onChange}
                     onKeyDown={this.onKeyDown}
                 />
+                <button onClick={this.props.onReset}>Reset</button>
                 <p className="editorText">
                     <em className="editorCurrentWord">
                         {correctText}{incorrectText}{unattemptedText}
