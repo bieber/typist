@@ -56,10 +56,17 @@ var Editor = React.createClass({
             this.props.onCompletion();
         }
 
-        this.setState(newState);
+        if (attempt !== ' ') {
+            this.setState(newState);
+        }
     },
 
     onKeyDown: function(event) {
+        if (!this.state.started) {
+            this.setState({started: true});
+            this.props.onStart();
+        }
+
         if (event.which === ENTER) {
             var wordMatch = this.props.word === this.state.attempt;
             var finishedByEnter = this.props.completionChar === '\n';
