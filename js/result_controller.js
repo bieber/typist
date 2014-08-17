@@ -22,6 +22,9 @@
  */
 
 var React = require('react');
+var ColorDisplay = require('./color_display.js');
+
+var WordStats = require('./word_stats.js');
 
 var ResultController = React.createClass({
     propTypes: {
@@ -33,40 +36,23 @@ var ResultController = React.createClass({
     render: function() {
         var words = this.props.words;
         var results = this.props.results;
-        var resultItems = [];
-        var wordCount = 0;
-        var firstTime = null;
-        var lastTime = null;
 
-        for (var i = 0; i < words.length; i++) {
-            if (words[i] === '\n') {
-                continue;
-            }
-            if (/[a-zA-Z]/.test(words[i])) {
-                wordCount++;
-            }
-            var item = results[i];
-            var lastTime = item.finish;
-            if (firstTime === null) {
-                firstTime = item.start;
-            }
+        var wordCount = WordStats.countWords(words);
+        var charCount = WordStats.countChars(words);
+        var elapsedTime = WordStats.countTime(results);
 
-            var timeElapsed = (item.finish - item.start) / 1000;
-            resultItems.push(
-                <li key={i}>
-                    {words[i]}: {timeElapsed}s
-                </li>
-            );
-        }
-        var totalTime = (lastTime - firstTime) / 1000;
+        var averageWPM = wordCount / elapsedTime * 60;
+        var averageCPM = charCount / elapsedTime * 60;
 
         return (
             <div className="resultsDisplay">
+                <p className="resultsWordCount">You typed {wordCount} words.</p>
+                <ul className="resultsSpeeds">
+                    <li>{averageWPM.toFixed(2)} WPM</li>
+                    <li>{averageCPM.toFixed(2)} CPM</li>
+                </ul>
                 <button onClick={this.props.onReset}>Reset</button>
-                <p>Total Time: {totalTime}s</p>
-                <p>Total Words: {wordCount}</p>
-                <p>WPM: {wordCount / totalTime * 60}</p>
-                <ul>{resultItems}</ul>
+                <ColorDisplay words={words} results={results} />
             </div>
         );
     }

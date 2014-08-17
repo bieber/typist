@@ -72,3 +72,29 @@ body {
 .editorCurrentWord {
     background-color: #cacaca;
 }
+
+.resultsWordCount {
+    font-size: 1.5em;
+}
+
+.resultsSpeeds {
+    padding: 0;
+}
+
+.resultsSpeeds li {
+    font-size: 1em;
+    display: inline;
+    list-style-type: none;
+}
+
+.resultsSpeeds li:before {
+    content: " | ";
+}
+
+.resultsSpeeds li:first-child:before {
+    content: none;
+}
+
+.colorDisplay em {
+    font-style: normal;
+}
