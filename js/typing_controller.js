@@ -62,7 +62,6 @@ var TypingController = React.createClass({
         }
 
         this.setState({currentWord: currentWord});
-        console.log(times);
         if (currentWord === this.props.words.length) {
             this.props.onCompletion(times);
         }

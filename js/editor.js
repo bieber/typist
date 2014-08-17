@@ -48,6 +48,10 @@ var Editor = React.createClass({
         this.setState(this.getInitialState());
     },
 
+    componentDidMount: function() {
+        this.refs.input.getDOMNode().focus();
+    },
+
     onChange: function(event) {
         var attempt = event.currentTarget.value;
         var newState = {attempt: attempt};
@@ -151,6 +155,7 @@ var Editor = React.createClass({
         return (
             <div className="editor">
                 <input
+                    ref="input"
                     className="editorInput"
                     type="text"
                     value={this.state.attempt}
