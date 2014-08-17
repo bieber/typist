@@ -57,33 +57,37 @@ var PageController = React.createClass({
     },
 
     render: function() {
+        var innerContent = null;
+
         switch (this.state.state) {
         case STATES.initial:
-            return (
+            innerContent =
                 <InitialController
                     uri={this.props.config.wordserv}
                     onLoad={this.onWordsLoaded}
-                />
-            );
+                />;
+            break;
 
         case STATES.typing:
-            return (
+            innerContent =
                 <TypingController
                     words={this.state.words}
                     onCompletion={this.onCompletion}
                     onReset={this.onReset}
-                />
-            );
+                />;
+            break;
 
         case STATES.results:
-            return (
+            innerContent =
                 <ResultController
                     words={this.state.words}
                     results={this.state.results}
                     onReset={this.onReset}
-                />
-            );
+                />;
+            break;
         }
+
+        return <div className="pageContainer">{innerContent}</div>;
     }
 
 });

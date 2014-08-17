@@ -144,7 +144,7 @@ var Editor = React.createClass({
         var otherParagraphs = null;
         if (rawParagraphs.length > 1) {
             otherParagraphs = rawParagraphs.slice(1).map(function(t, i, arr) {
-                return <p className="editorText" key={i}>{t}</p>;
+                return <p className="editorRemainderText" key={i}>{t}</p>;
             });
         }
 

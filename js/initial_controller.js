@@ -173,6 +173,12 @@ var InitialController = React.createClass({
         return (
             <div className="initialForm">
                 <form onSubmit={this.onSubmit}>
+                    <input
+                        type="text"
+                        disabled={this.state.busy}
+                        value={count}
+                        onChange={this.onCountChange}
+                    />
                     <select
                         disabled={this.state.busy}
                         value={this.state.denomination}
@@ -180,12 +186,6 @@ var InitialController = React.createClass({
                     >
                         {options}
                     </select>
-                    <input
-                        type="text"
-                        disabled={this.state.busy}
-                        value={count}
-                        onChange={this.onCountChange}
-                    />
                     <button
                         disabled={this.state.busy || count === ''}
                         onClick={this.onSubmit}

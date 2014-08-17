@@ -17,6 +17,43 @@
  * along with typist.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+body {
+    text-align: center;
+}
+
+.pageContainer {
+    border: 2px solid black;
+    border-radius: 7px;
+    display: inline-block;
+    padding: 10px;
+}
+
+.initialForm input[type=text] {
+    width: 40px;
+}
+
+.editorText {
+    width: 800px;
+    text-align: left;
+    font-size: 1.4em;
+    text-indent: 300px;
+}
+
+.editorRemainderText {
+    width: 800px;
+    text-align: left;
+    font-size: 1.4em;
+}
+
+.editorInput {
+    font-size: 1.4em;
+    margin-right: 20px;
+}
+
+.editor button {
+    font-size: 1.4em;
+}
+
 .editorCorrect {
     color: green;
     font-style:normal;
