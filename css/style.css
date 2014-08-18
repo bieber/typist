@@ -95,6 +95,10 @@ body {
     content: none;
 }
 
+.colorDisplay p {
+    width: 800px;
+}
+
 .colorDisplay em {
     font-style: normal;
 }

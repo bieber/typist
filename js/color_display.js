@@ -36,17 +36,17 @@ function intToHexDigits(x) {
     return s;
 }
 
-function colorByCPS(averageCPS, minCPS, maxCPS, cps) {
-    if (cps === averageCPS || cps === null) {
+function colorByCPS(medianCPS, minCPS, maxCPS, cps) {
+    if (cps === medianCPS || cps === null) {
         return '#000000';
     }
 
     var red = 0;
     var green = 0;
     var blue = 0;
-    if (cps < averageCPS) {
-        var maxDistance = averageCPS - minCPS;
-        var currentDistance = averageCPS - cps;
+    if (cps < medianCPS) {
+        var maxDistance = medianCPS - minCPS;
+        var currentDistance = medianCPS - cps;
         if (maxDistance <= 0 || currentDistance <= 0) {
             return '#000000';
         }
@@ -54,8 +54,8 @@ function colorByCPS(averageCPS, minCPS, maxCPS, cps) {
         var proportion = currentDistance / maxDistance;
         red = Math.floor(proportion * 255);
     } else {
-        var maxDistance = maxCPS - averageCPS;
-        var currentDistance = cps - averageCPS;
+        var maxDistance = maxCPS - medianCPS;
+        var currentDistance = cps - medianCPS;
         if (maxDistance <= 0 || currentDistance <= 0) {
             return '#000000';
         }
@@ -81,10 +81,15 @@ var ColorDisplay = React.createClass({
         var words = this.props.words;
         var results = this.props.results;
 
-        var charCount = WordStats.countChars(words);
-        var totalTime = WordStats.countTime(results);
-        var averageCPS = charCount / totalTime;
         var cpsByWord = WordStats.countCPSByWord(words, results);
+        var sortedCPS = cpsByWord.filter(function(v, i, is) {
+            return v !== null;
+        }).sort(function(a, b) { return b - a; });
+
+        var length = sortedCPS.length;
+        var medianCPS = sortedCPS.length % 2 === 0
+            ? (sortedCPS[length / 2] + sortedCPS[(length / 2) - 1]) / 2
+            : sortedCPS[Math.floor(length / 2)];
 
         var minCPS = null;
         var maxCPS = null;
@@ -111,7 +116,7 @@ var ColorDisplay = React.createClass({
                 }
 
                 var color = colorByCPS(
-                    averageCPS,
+                    medianCPS,
                     minCPS,
                     maxCPS,
                     cpsByWord[i]

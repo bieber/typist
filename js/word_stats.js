@@ -46,7 +46,9 @@ module.exports = {
             if (words[i] === '\n') {
                 continue;
             }
-            count += words[i].length;
+            if (/[a-zA-Z]/.test(words[i])) {
+                count += words[i].length;
+            }
         }
         return count;
     },
@@ -74,7 +76,7 @@ module.exports = {
             var word = words[i];
             var result = results[i];
 
-            if (word === '\n' || isEmpty(result)) {
+            if (word === '\n' || isEmpty(result) || !(/[a-zA-Z]/.test(word))) {
                 cpsByWord.push(null);
                 continue;
             }
