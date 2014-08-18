@@ -21,6 +21,12 @@ body {
     text-align: center;
 }
 
+.initialForm p {
+    width: 600px;
+    text-align: left;
+    font-size: 1.2em;
+}
+
 .pageContainer {
     border: 2px solid black;
     border-radius: 7px;
@@ -30,6 +36,15 @@ body {
 
 .initialForm input[type=text] {
     width: 40px;
+}
+
+.typingHelpText {
+    width: 500px;
+    display: inline-block;
+    text-align: left;
+    font-size: 1.2em;
+    color: #0a0a0a;
+    margin-bottom: 20px;
 }
 
 .editorText {
@@ -93,6 +108,11 @@ body {
 
 .resultsSpeeds li:first-child:before {
     content: none;
+}
+
+.resultsHelpText {
+    width: 800px;
+    font-size: 1.1em;
 }
 
 .colorDisplay p {

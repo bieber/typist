@@ -52,6 +52,14 @@ var ResultController = React.createClass({
                     <li>{averageCPM.toFixed(2)} CPM</li>
                 </ul>
                 <button onClick={this.props.onReset}>Reset</button>
+                <p className="resultsHelpText">
+                    This is the text you typed, highlighted by speed.  Words
+                    highlighted {'in'} green you typed faster than your median
+                    speed (measured per character), and words highlighted
+                    {' in'} red you typed slower.  The brighter the highlight,
+                    the further from the median your typing speed {'for '}
+                    that word.
+                </p>
                 <ColorDisplay words={words} results={results} />
             </div>
         );

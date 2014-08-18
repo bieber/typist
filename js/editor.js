@@ -45,7 +45,23 @@ var Editor = React.createClass({
     },
 
     componentWillReceiveProps: function(newProps) {
-        this.setState(this.getInitialState());
+        var wordMatch = newProps.word === this.props.word;
+
+        var remainderMatch = true;
+        if (newProps.remainder.length !== this.props.remainder.length) {
+            remainderMatch = false;
+        } else {
+            for (var i = 0; i < newProps.remainder.length; i++) {
+                if (newProps.remainder[i] !== this.props.remainder[i]) {
+                    remainderMatch = false;
+                    break;
+                }
+            }
+        }
+
+        if (!wordMatch || !remainderMatch) {
+            this.setState(this.getInitialState());
+        }
     },
 
     componentDidMount: function() {

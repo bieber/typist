@@ -38,7 +38,8 @@ var TypingController = React.createClass({
     getInitialState: function() {
         times = [];
         return {
-            currentWord: 0
+            currentWord: 0,
+            started: false
         }
     },
 
@@ -49,6 +50,7 @@ var TypingController = React.createClass({
     onStart: function() {
         var now = new Date();
         times.push({start: now.getTime()});
+        this.setState({started: true});
     },
 
     onCompletion: function() {
@@ -85,15 +87,26 @@ var TypingController = React.createClass({
             }
         }
 
+        var helpText = this.state.started
+            ? null
+            : <div className="typingHelpText">
+                To start the timer, begin typing {'in'} the box below.  Be sure
+                to end every paragraph and the text selection by pressing the
+                Enter key.
+            </div>;
+
         return (
-            <Editor
-                word={word}
-                remainder={remainder}
-                completionChar={completionChar}
-                onStart={this.onStart}
-                onCompletion={this.onCompletion}
-                onReset={this.props.onReset}
-            />
+            <div>
+                {helpText}
+                <Editor
+                    word={word}
+                    remainder={remainder}
+                    completionChar={completionChar}
+                    onStart={this.onStart}
+                    onCompletion={this.onCompletion}
+                    onReset={this.props.onReset}
+                />
+            </div>
         );
     }
 });

@@ -193,6 +193,11 @@ var InitialController = React.createClass({
                         Load
                     </button>
                 </form>
+                <p>
+                    This will test your typing speed.  To start the test,
+                    select the amount of text you want to type (you can use
+                    chapters, paragraphs, or words) and press {'"Load."'}
+                </p>
             </div>
         );
     }
