@@ -94,8 +94,7 @@ var TypingController = React.createClass({
             ? null
             : <div className="typingHelpText">
                 To start the timer, begin typing {'in'} the box below.  Be sure
-                to end every paragraph and the text selection by pressing the
-                Enter key.
+                to end every paragraph by pressing the Enter key.
             </div>;
 
         return (
