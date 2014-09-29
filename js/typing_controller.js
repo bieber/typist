@@ -84,6 +84,9 @@ var TypingController = React.createClass({
                 completionChar = ' ';
             } else if (nextWord !== '\n') {
                 completionChar = '';
+            } else if (this.state.currentWord + 2 === this.props.words.length) {
+                // Skip the newline at the end of the final paragraph
+                completionChar = '';
             }
         }
 
