@@ -20,7 +20,11 @@
 var gulp = require('gulp');
 var util = require('gulp-util');
 var browserify = require('gulp-browserify');
+var gulpif = require('gulp-if');
+var uglify = require('gulp-uglify');
 var _ = require('reactify');
+
+var NODE_ENV = require('node-env');
 
 gulp.task('build', function() {
     gulp.src('./js/init.js', {read: false})
@@ -30,6 +34,7 @@ gulp.task('build', function() {
         }))
         .on('error', util.log)
         .on('error', util.beep)
+        .pipe(gulpif(NODE_ENV === 'production', uglify()))
         .pipe(gulp.dest('./build/'));
     gulp.src('./html/**/*.html')
         .pipe(gulp.dest('./build/'));
