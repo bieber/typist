@@ -1,0 +1,35 @@
+{
+  "name": "typing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "URIjs": "^1.16.1",
+    "gulp": "^3.8.5",
+    "react": "0.12.0",
+    "xhr": "^2.5.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-if": "^2.0.2",
+    "gulp-uglify": "^3.0.1",
+    "gulp-util": "^3.0.8",
+    "node-env": "^0.1.6",
+    "reactify": "^1.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bieber/typist.git"
+  },
+  "author": "Robert Bieber",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/bieber/typist/issues"
+  },
+  "homepage": "https://github.com/bieber/typist#readme"
+}
