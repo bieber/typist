@@ -22,5 +22,5 @@
 module.exports = {
     // This should point to a running instance of wordserv, which you
     // can find at www.github.com/bieber/wordserv
-    wordserv: "http://www.path.to/wordserv/"
+    wordserv: "PATH_TO_WORDSERV"
 };
